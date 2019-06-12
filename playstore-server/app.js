@@ -7,14 +7,12 @@ const app = express();
 app.use(cors());
 app.use(morgan("common"));
 //Express 4.x command for asynch operation
-const listener = app.listen(8000, () => {
-  console.log(`Server is running on port ${listener.address().port}`);
-});
+
 
 const playstore = require("./playstore.js");
 
 app.get("/apps", (req, res) => {
-  const { sort, genres = "" } = req.query;
+  const { sort, genres } = req.query;
 
   let results = playstore;
 
@@ -46,3 +44,5 @@ app.get("/apps", (req, res) => {
 
   res.json(results);
 });
+
+module.exports = app;
